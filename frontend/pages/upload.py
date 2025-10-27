@@ -27,6 +27,21 @@ uploaded_file = st.file_uploader("Upload PDF, DOCX, or TXT file", type=["pdf", "
 
 if uploaded_file is not None:
     st.info(f"📁 Selected: {uploaded_file.name}")
+    if st.session_state["logged_in"] == False: 
+        try:
+        response = client.initiate_auth(
+            AuthFlow="USER_PASSWORD_AUTH",
+            AuthParameters={"USERNAME": username, "PASSWORD": password},
+            ClientId=CLIENT_ID
+        )
+        token = response["AuthenticationResult"]["AccessToken"]
+        st.session_state["logged_in"] = True
+        st.session_state["access_token"] = token
+        st.success("✅ Login successful! Go to the Upload page.")
+    except client.exceptions.NotAuthorizedException:
+        st.error("❌ Invalid username or password.")
+    except Exception as e:
+        st.error(f"⚠️ Error: {e}")
     if st.button("Upload to S3"):
         try:
             s3.upload_fileobj(uploaded_file, BUCKET_NAME, f"documents/{uploaded_file.name}")
