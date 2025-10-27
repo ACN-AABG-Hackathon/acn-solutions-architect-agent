@@ -10,7 +10,7 @@ st.subheader("Direct upload to S3")
 # AWS credentials and bucket
 AWS_ACCESS_KEY = st.secrets["AWS_ACCESS_KEY_ID"]
 AWS_SECRET_KEY = st.secrets["AWS_SECRET_ACCESS_KEY"]
-AWS_REGION = "ap-southeast-1"   # change if needed
+AWS_REGION = "us-east-1"   # change if needed
 BUCKET_NAME = "aws-architect-agent-requirement"
 
 s3 = boto3.client(
@@ -26,7 +26,7 @@ if uploaded_file is not None:
     st.info(f"📁 Selected: {uploaded_file.name}")
     if st.button("Upload to S3"):
         try:
-            s3.upload_fileobj(uploaded_file, BUCKET_NAME, f"uploads/{uploaded_file.name}")
+            s3.upload_fileobj(uploaded_file, BUCKET_NAME, f"documents/{uploaded_file.name}")
             st.success("✅ File uploaded successfully to S3!")
         except NoCredentialsError:
             st.error("❌ AWS credentials not found.")
