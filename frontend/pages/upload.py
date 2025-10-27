@@ -11,9 +11,9 @@ st.subheader("Direct upload to S3")
 # ----------------------
 # Cognito login setup
 # ----------------------
-COGNITO_DOMAIN = "https://us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com/login?client_id=45hcn8a97al4j4hmmdhgsgvtvf&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Ftest-aabg-app-app-3ef6mcdpuz6vyz4pbyfd8k.streamlit.app%2Fupload"
+COGNITO_DOMAIN = "https://us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com/login?client_id=45hcn8a97al4j4hmmdhgsgvtvf&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Facn-solutions-architect-agent-webapp.streamlit.app%2Fupload"
 CLIENT_ID =  st.secrets["APP_CLIENT_ID"] 
-REDIRECT_URI = "https://test-aabg-app-app-3ef6mcdpuz6vyz4pbyfd8k.streamlit.app/upload?code=db27002a-68f8-490b-8823-fce79e18501a"
+REDIRECT_URI = "https://acn-solutions-architect-agent-webapp.streamlit.app/upload"
 TOKEN_URL = f"https://{COGNITO_DOMAIN}/oauth2/token"
 LOGIN_URL = (
     f"https://{COGNITO_DOMAIN}/login?client_id={CLIENT_ID}"
