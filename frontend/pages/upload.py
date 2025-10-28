@@ -15,10 +15,14 @@ COGNITO_DOMAIN = "us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com"
 CLIENT_ID =  st.secrets["APP_CLIENT_ID"]
 REDIRECT_URI = "https://acn-solutions-architect-agent-webapp.streamlit.app/upload"
 TOKEN_URL = f"https://{COGNITO_DOMAIN}/oauth2/token"
-LOGIN_URL = (
-    f"https://{COGNITO_DOMAIN}/login?client_id={CLIENT_ID}"
-    f"&response_type=code&scope=email+openid&redirect_uri={REDIRECT_URI}"
-)
+
+#LOGIN_URL = (
+#    f"https://{COGNITO_DOMAIN}/login?client_id={CLIENT_ID}"
+#    f"&response_type=code&scope=email+openid&redirect_uri={REDIRECT_URI}"
+#)
+
+LOGIN_URL = f"https://us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com/login/continue?client_id={CLIENT_ID}&redirect_uri=https%3A%2F%2Facn-solutions-architect-agent-webapp.streamlit.app%2Fupload&response_type=code&scope=email+openid+phone)%22%3E%27"
+
 st.toast("initialize session_state")
 # Initialize session state for login
 if "logged_in" not in st.session_state:
