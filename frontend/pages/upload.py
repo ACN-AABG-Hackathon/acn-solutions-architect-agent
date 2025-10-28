@@ -14,7 +14,7 @@ st.subheader("Direct upload to S3")
 COGNITO_DOMAIN = "https://us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com"
 CLIENT_ID =  st.secrets["APP_CLIENT_ID"]
 REDIRECT_URI = "https://acn-solutions-architect-agent-webapp.streamlit.app/upload"
-TOKEN_URL = f"https://{COGNITO_DOMAIN}/oauth2/token"
+TOKEN_URL = f"{COGNITO_DOMAIN}/oauth2/token"
 
 LOGIN_URL = (
     f"{COGNITO_DOMAIN}/login?client_id={CLIENT_ID}"
