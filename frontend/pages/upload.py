@@ -68,21 +68,23 @@ if not st.session_state.logged_in:
 # ----------------------
 # Cognito logout setup
 # ----------------------
-def logout_user(): 
-    #Clear local session
+# ----------------------
+# Cognito logout setup
+# ----------------------
+def logout_user():
+    # Clear local session
     for key in list(st.session_state.keys()):
-        del st.session_state[key]    
+        del st.session_state[key]
 
-    #Redirect to Cognito Logout 
+    # Redirect to Cognito Logout
     st.write(f'<meta http-equiv="refresh" content="0; url={LOGOUT_URL}">', unsafe_allow_html=True)
-
-    #Check if user is logged in 
-    if "username" in st.session_state: 
-        st.write(f"👋 Hello, {st.session_state['username']}!")
-        if st.button("Logout"): 
-            logout_user()
-        else: 
-            st.write("You are not logged in")
+# ----------------------
+# Show logout button when logged in
+# ----------------------
+if st.session_state.logged_in:
+    st.write("👋 You are logged in!")
+    if st.button("Logout"):
+        logout_user()
 # ----------------------
 # AWS S3 upload
 # ----------------------
