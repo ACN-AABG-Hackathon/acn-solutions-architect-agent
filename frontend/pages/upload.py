@@ -3,6 +3,7 @@ import boto3
 from botocore.exceptions import NoCredentialsError
 import requests
 from requests.auth import HTTPBasicAuth
+import urllib.parse
 
 st.set_page_config(page_title="Prompt Squad Uploader", page_icon="🚀")
 st.title("🚀 Prompt Squad Document Uploader")
@@ -15,11 +16,18 @@ COGNITO_DOMAIN = "https://us-east-1qitbxlp6m.auth.us-east-1.amazoncognito.com"
 CLIENT_ID = st.secrets["APP_CLIENT_ID"]
 CLIENT_SECRET = st.secrets["APP_CLIENT_SECRET"]
 REDIRECT_URI = "https://acn-solutions-architect-agent-webapp.streamlit.app/upload"
+LOGOUT_URI = "https://acn-solutions-architect-agent-webapp.streamlit.app/"
 TOKEN_URL = f"{COGNITO_DOMAIN}/oauth2/token"
 LOGIN_URL = (
     f"{COGNITO_DOMAIN}/login/continue?client_id={CLIENT_ID}"
     f"&response_type=code&scope=email+openid&redirect_uri={REDIRECT_URI}"
 )
+LOGOUT_URL = (
+        f"{COGNITO_DOMAIN}/logout?"
+        f"client_id={CLIENT_ID}&"
+        f"logout_uri={urllib.parse.quote(LOGOUT_URI)}"
+)
+
 
 # Initialize session state
 if "logged_in" not in st.session_state:
@@ -57,7 +65,24 @@ if not st.session_state.logged_in:
     st.warning("Please log in with Cognito to upload files.")
     st.markdown(f"[Login to Cognito]({LOGIN_URL})", unsafe_allow_html=True)
     st.stop()
+# ----------------------
+# Cognito logout setup
+# ----------------------
+def logout_user(): 
+    #Clear local session
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]    
 
+    #Redirect to Cognito Logout 
+    st.write(f'<meta http-equiv="refresh" content="0; url={LOGOUT_URL}">', unsafe_allow_html=True)
+
+    #Check if user is logged in 
+    if "username" in st.session_state: 
+        st.write(f"👋 Hello, {st.session_state['username']}!")
+        if st.button("Logout"): 
+            logout_user()
+        else: 
+            st.write("You are not logged in")
 # ----------------------
 # AWS S3 upload
 # ----------------------
