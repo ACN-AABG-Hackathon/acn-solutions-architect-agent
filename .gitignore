@@ -1,0 +1,91 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Streamlit secrets (use Streamlit Cloud secrets instead)
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Logs
+*.log
+logs/
+.logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# AWS
+.aws/
+
+# Documents and uploads (if sensitive)
+uploads/
+documents/
+*.pdf
+*.docx
+
+# Diagrams (generated)
+diagrams/
+*.png
+*.jpg
+*.jpeg
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+Thumbs.db
+.DS_Store
